@@ -15,5 +15,5 @@ Repositorio para Practicas y Proyecto del Laboratorio del Curso **Lenguajes Form
 <br>
 # Contendio del Repositorio: <br>
 **Seccion de Practicas**
-[**Practica 1**](./Práctica1)
+[**Practica 1**](./Practica1)
 
