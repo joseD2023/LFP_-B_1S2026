@@ -1,0 +1,8 @@
+//
+// Created by josev on 13/02/2026.
+//
+
+#ifndef PRACTICA_UNICA_VALIDACIONES_H
+#define PRACTICA_UNICA_VALIDACIONES_H
+
+#endif //PRACTICA_UNICA_VALIDACIONES_H
