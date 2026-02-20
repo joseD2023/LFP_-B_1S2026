@@ -14,6 +14,13 @@ Repositorio para Practicas y Proyecto del Laboratorio del Curso **Lenguajes Form
 **Carnet:** 202407095 <br>
 <br>
 # Contendio del Repositorio: <br>
+
+|Practica   |Nombre                        |Proyectos|
+|--------   |------                        |-------  |
+| 1         |[**Practica 1**](./Practica1) |
+
+
+
 **Seccion de Practicas**
-[**Practica 1**](./Practica1)
+
 
