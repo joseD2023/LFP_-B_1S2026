@@ -15,11 +15,11 @@ using namespace std;
  * que el lenguaje lo reconozca asi que es más facil aún para ordenarlos
  */
 struct Estudiante {
-    int carnet;
+    string carnet;
     string nombre;
     string apellido;
     string carrera;
-    int semestre; // 1-10
+    string semestre; // 1-10
 };
 
 #endif //PRACTICA_UNICA_ESTUDIANTE_H
