@@ -13,10 +13,10 @@ using namespace std;
  */
 
 struct Cursos {
-    string codigo; //numero entero
+    int codigo; //numero entero
     string nombre;
-    string creditos; //numero entero de 1-8
-    string semestre; // 1-10
+    int  creditos; //numero entero de 1-8
+    int semestre; // 1-10
     string carrera; //carrera que pertenece el curso
 };
 

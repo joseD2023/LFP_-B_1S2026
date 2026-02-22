@@ -23,12 +23,11 @@ bool esSemestreValido(string semestre);
 bool validacionNombreCurso(string nombreCurso);
 bool validacionCodigoCurso(string codigoCurso);
 bool validacionCreditos(string creditos);
-bool validacionSemestre(string semestre);
-bool validacionCarrera(string carrera);
 
 
 /*Funcionamiento del Tokens del Archivo notas.lfp*/
-
+bool validacionNota(string nota);
+bool validacionCiclo(string ciclo);
 
 
 

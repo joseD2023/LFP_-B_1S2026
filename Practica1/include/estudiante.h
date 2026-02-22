@@ -19,7 +19,7 @@ struct Estudiante {
     string nombre;
     string apellido;
     string carrera;
-    string semestre; // 1-10
+    int semestre; // 1-10
 };
 
 #endif //PRACTICA_UNICA_ESTUDIANTE_H

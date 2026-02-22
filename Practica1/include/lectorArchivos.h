@@ -16,5 +16,4 @@ void cargarEstudiante(string nombreArchivo1);
 void cargarCursos(string nombreArchivo2);
 void cargarNotas(string nombreArchivo3);
 
-
 #endif //PRACTICA_UNICA_LECTORARCHIVOS_H

@@ -4,71 +4,52 @@
 
 #include "include/validaciones.h"
 #include "string"
+#include "algorithm"
+#include "cctype"
 #include <iostream>
 using namespace std;
 
+
+/*Validaciones Semantica del archivo estudiante.lfp*/
+
 bool validacionCarnet(string carnet) {
     if (carnet.length() != 9) {
+        cout << "   | Error: Carnet Invalido | = " << carnet <<  endl;
         return false;
+        cout << "Error longitud Carnet " << endl;
     } //como es diferente a la cantidad del numero autorizado del carnet no es valido
-
-    //ahora vamos a comprobar que el caracter solo contenga digitos dentro de su extension
-    for(char digito: carnet ) {
-        if (!isdigit(digito)) { //si en la cadena existe por lo menos una letra entonces no es valido el carnet
-            return false;
-        }
-    }
     return true;
 }
 
 
 bool nombreValido(string nombre) {
-    /*Vamos a trabajar con la validacion del Nombre podemos verificar que si tiene
-     * un dígito que no pertenezca al alfabeto entonces mandamos error para el funcionamiento
-     */
-    string noSimbolos = " @_-/<>+=#$%&/().,"; //no acepta estos caracteres en el nombre
-    if (nombre.empty()) {
-        return false;
-    }
-    for (char n : nombre) {
-        for (int i=0; i<noSimbolos.length(); i++) {
-            if (n == noSimbolos[i] || isdigit(n)) {
-                return false;
-            }
-        }
-    }
-    return true;
+    if (nombre.length() > 3){return true;}
+    cout << "   | Error: Nombre Invalido | =  " << nombre <<  endl;
+    return false;
 }
 
 bool apellidoValido(string apellido) {
-
-    string noSimbolos = "@_-/<>+=#$%&/().,";
-    if (apellido.empty()) {
-        return false;
-    }
-    for (char a : apellido) {
-        for (int i=0; i<noSimbolos.length(); i++) {
-            if (a == noSimbolos[i] || isdigit(a)) {
-                return false;
-            }
-        }
-    }
-    return true;
+    if (apellido.length() > 3){return true;}
+    cout << "   | Error: Apellido Invalido | = " << apellido <<  endl;
+    return false;;
 }
 
 
 bool carreraValidaUsac(string carrera) {
-    string carrerasValidas[] = {"Sistemas","Industrial", "Civil", "Ambiental", "Quimica"};
+
+    //vamos a transformar la palabra para que admita sin importar si es mayusculas o minuscula
+    transform(carrera.begin(), carrera.end(), carrera.begin(), ::tolower);
+    string carrerasValidas[] = {"industrial", "civil", "ambiental", "quimica", "sistemas", "mecanica", "electronica", "electrica", "mecanicaindustrial", "mecanicaelectrica"};
     bool encontradoCarrera = false;
 
-    /*Tenemos un problema sobre usar mayusculas o minisiculas entonces carreras admitidas seria tipo
-     * que al inicio tenga Mayusculas
-     */
-    if (carrera.empty() || !nombreValido(carrera)) {return false; } //si viene una respuesta falsa de un nombre valido va a regresa que la carrera no es valida
+    if (carrera.empty()) {return false; } //si viene una respuesta falsa de un nombre valido va a regresa que la carrera no es valida
+
     for (string c : carrerasValidas) {
-        if (c == carrera) {encontradoCarrera = true;}
-    }
+        if (c == carrera) {encontradoCarrera = true;}}
     if (encontradoCarrera) {return true; }
+
+    cout << endl;
+    cout << "   | Error: Carrera Invalida | =  " << carrera <<  endl;
     return false;
 }
 
@@ -79,43 +60,69 @@ bool esSemestreValido(string semestre) {
     /*La validacion del semestre es que sea un numero mayo a 0 y no pase del 10 ya que solo existe 5 años para una ingenieria
      * bueno eso va a depender mucho verdad, pero como estandar
      */
-    if (semestre.empty()){return false;} //viene vacio el texto o lo que sea
-    //vamos a verificar que sea un digito y no una letra
-    for (char d : semestre) {
-        if (!isdigit(d)) {
-            return false;
-        }
-    }
     int noSemestre = stoi(semestre); //convertimos de string a int
-    if (noSemestre <= 0 || noSemestre > 10) {
-        return false;
-    }
+    if (noSemestre <= 0 || noSemestre > 10) { cout << "   | Error: Semestre Invalido | =  " << semestre << endl; return false;}
     return true;
 }
 
 
-/*Ahora vamos con la validaciones de los curso para su funcionamiento es decir la parte semantica*/
+/*Validaciones Semantica del archivo curso.lfp*/
 
 bool validacionNombreCurso(string nombreCurso) {
+    /*ahora en la validacion del nombre del curso debemos validar que el numero del curso osea ya sea
+     * base de datos 1 o base de datos 2 pero no debe existir una base de datos 1000
+     * asi que vamos a delimitar ese nombre
+     */
+    string numeracionCurso;
 
+    if (nombreCurso.length() > 4) {
+        for (char nc : nombreCurso) {
+            if (isdigit(nc)) {
+                numeracionCurso += nc; }}
 
+        if (numeracionCurso.empty()) {
+            return true; //porque si no consiguio un numero es decir que el nombre esta bien pero no cuenta con numeracion
+        }
+
+        if (!numeracionCurso.empty()) {
+            int numeroValido = stoi(numeracionCurso);
+            if (numeroValido <= 0 || numeroValido > 5) {
+                cout << "   | Error: Nombre Curso Invalido | =  " << nombreCurso <<  endl;
+                return false;
+            }
+            return true;
+        }
+
+    }
 }
 
-bool validacionCodigoCurso(string codigoCurso) {
 
+
+
+bool validacionCodigoCurso(string codigoCurso) {
+    if (codigoCurso.length() != 3){ cout << "   | Error: Nombre Curso Invalido | =  " << codigoCurso <<endl;return false; }
+    return true;
 }
 
 bool validacionCreditos(string creditos) {
-
+    int creditosNum = stoi(creditos);
+    if (creditosNum <= 0 || creditosNum >8){cout << "   | Error: Creditos Invalidos | =  " << creditos << endl; return false; }
+    return true;
 }
 
-bool validacionSemestre(string semestre) {
 
+/*Validaciones Semantica del archivo notas.lfp*/
+
+bool validacionNota(string nota) {
+    double valorNota = stod(nota);
+    if (valorNota < 0.0 || valorNota >100.0){return false;}return true;
 }
 
-bool validacionCarrera(string carrera) {
-
+bool validacionCiclo(string ciclo) {
+    return (ciclo[0] == '1' || ciclo[0] == '2') && (ciclo[1] == 'S' || ciclo[1] == 's');
 }
+
+
 
 
 
