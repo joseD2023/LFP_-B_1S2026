@@ -73,16 +73,16 @@ void imprimirPantalla(vector<Notas> lista) {
  * Analisis INT,STRING,STRING,STRING,INT
  */
 
-void cargarEstudiante(string nombreArchivo1) {
+vector<Estudiante> cargarEstudiante(string nombreArchivo1, vector <Estudiante> listaEstudiantes) {
     Estudiante datoEstudiantil;
     bool sinFallas = false;
     //Declaramos un vector de struct
-    vector <Estudiante> listaEstudiantes; //creamos un vector de solo estructura de Estudiante
+    //vector <Estudiante> listaEstudiantes; //creamos un vector de solo estructura de Estudiante
 
     ifstream archivo(nombreArchivo1); //pasamos el archivo de cursos
     if (!archivo.is_open()) {
         cout << " Alerta !. No se pudo abrir el archivo de Cursos " << endl;
-        return;
+        return listaEstudiantes;
     }
 
     string carnet, nombre, apellido, carrera, semestre;
@@ -135,6 +135,7 @@ void cargarEstudiante(string nombreArchivo1) {
 
                 cout << "   [SEMANTICO] OK " << endl;
                 cout << ">>> Estudiante agregado Exitosamente  " << endl;
+                //return listaEstudiantes;
 
             }else {
                 cout << ">>> Registro Rechazado " << endl;
@@ -142,15 +143,14 @@ void cargarEstudiante(string nombreArchivo1) {
         }
         sinFallas = false;
     }
-    //ahora para mostrar lo que cargamos
-    imprimirPantalla(listaEstudiantes);
+    return listaEstudiantes;
 }
 
 
 /*Lo que podemos reutilizar es Carrera Semestre para las validaciones del archivo*/
 
-void cargarCursos(string nombreArchivo2) {
-    vector<Cursos> listaCursos;
+vector<Cursos> cargarCursos(string nombreArchivo2,  vector<Cursos> listaCursos) {
+    //vector<Cursos> listaCursos;
     Cursos cursosUsac;
     bool sinFallas = false;
 
@@ -158,7 +158,7 @@ void cargarCursos(string nombreArchivo2) {
 
     if (!archivo.is_open()) {
         cout << " Alerta !. No se pudo abrir el archivo de Cursos "  <<  endl;
-        return;
+        return listaCursos; /* sin hay un error se envia una lista vacia*/
     }
 
     //necesitamos importar las validaciones de los tokens de estudiantes
@@ -213,14 +213,14 @@ void cargarCursos(string nombreArchivo2) {
 
         sinFallas = false;
     }
-    imprimirPantalla(listaCursos);
+    return listaCursos;
 }
 
 
 
 /*Ahora vamso a cargar el archivo de notas.lfp y leerlos correctamente*/
-void cargarNotas(string nombreArchivo3) {
-    vector <Notas> listaNotas;
+vector <Notas> cargarNotas(string nombreArchivo3, vector <Notas> listaNotas) {
+    //vector <Notas> listaNotas;
     Notas n;
     bool sinFallas = false;
 
@@ -228,7 +228,7 @@ void cargarNotas(string nombreArchivo3) {
 
     if (!archivo.is_open()) {
         cout << " Alerta !. No se pudo abrir el archivo de Cursos "  <<  endl;
-        return;
+        return listaNotas;
     }
 
     string carnet, codigoCurso, nota, ciclo, anio;
@@ -274,7 +274,7 @@ void cargarNotas(string nombreArchivo3) {
                 cout << ">>> Registro Rechazado " << endl;}}
         sinFallas = false;
     }
-    imprimirPantalla(listaNotas);
+    return listaNotas;
 }
 
 

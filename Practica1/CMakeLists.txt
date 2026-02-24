@@ -14,4 +14,7 @@ add_executable(Practica_Unica main.cpp
         lectorArchivos.cpp
         generadorReportes.cpp
         include/validacionLexica.h
-        validacionLexica.cpp)
+        validacionLexica.cpp
+        reportes/generalesCursos.cpp
+        include/generalesCursos.h
+        reportes/generalesCursos.cpp)

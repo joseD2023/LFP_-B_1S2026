@@ -8,12 +8,20 @@
 #define PRACTICA_UNICA_LECTORARCHIVOS_H
 #include <iostream>
 #include "string"
+#include "estudiante.h"
+#include "curso.h"
+#include "nota.h"
+#include "vector"
 using namespace std;
 
 /*Declaracion del Funcionamiento de leer archivos*/
 
-void cargarEstudiante(string nombreArchivo1);
-void cargarCursos(string nombreArchivo2);
-void cargarNotas(string nombreArchivo3);
+vector<Estudiante> cargarEstudiante(string nombreArchivo1, vector <Estudiante> listaEstudiantes);
+vector<Cursos> cargarCursos(string nombreArchivo2, vector<Cursos> listaCursos);
+vector <Notas> cargarNotas(string nombreArchivo3, vector <Notas> listaNotas);
+
+void imprimirPantalla(vector<Estudiante> lista);
+void imprimirPantalla(vector<Cursos> lista);
+void imprimirPantalla(vector<Notas> lista) ;
 
 #endif //PRACTICA_UNICA_LECTORARCHIVOS_H
