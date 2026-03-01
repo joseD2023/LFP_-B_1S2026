@@ -19,6 +19,9 @@ estudiantes por semestre. */
  */
 
 #include <iostream>
+#include <list>
+#include <map>
+#include "algorithm"
 #include "string"
 #include "vector"
 #include "fstream"
@@ -27,42 +30,136 @@ estudiantes por semestre. */
 #include "cmath"
 #include "../include/curso.h"
 
-struct Carreras {
-    int carnet;
-    string carrera;
-    int semestre;
-};
+
+vector<string> lectorCarreras(string nombreArchivo) {
+    vector<string> carreras;
+    string linea;
+    ifstream archivo(nombreArchivo);
+    if (!archivo.is_open()){return carreras;} /*una lista vacia*/
+
+    while (getline(archivo, linea)) {
+        if (!linea.empty()) {
+            carreras.push_back(linea);
+        }
+    }
+    archivo.close();
+    return carreras;
+}
 
 
 void generarReportesAnalisisCarrera(vector<Estudiante>listaE, vector<Notas> listaN, vector<Cursos> listaC) {
-    vector<Carreras> listaCarreras;
-    Carreras c;
 
+    vector<string> listaCarreras = lectorCarreras("../data/carreras.lfp");
+    if (listaCarreras.empty()){cout << "Lista Carrera Vacia"; return;}
     if (listaE.empty() || listaN.empty() || listaC.empty()){cout << "Alguna de las lista esta vacia"; return; }
     ofstream html("ReportesAnalisisCarrera.html");
-    if (html.is_open()){cout << "Error al Crear el archivo html "; return; }
+    if (!html.is_open()){cout << "Error al Crear el archivo html "; return; }
+    html << "<!DOCTYPE html>\n";
+    html << "<html>\n<head>\n<title>Analisis Carrera</title>\n</head>\n";
 
-    /*Recorrer todos los cursos y compararlos con que estudiantes se encuentran en ellos*/
+    for (int i = 0; i < listaCarreras.size(); i++) {
+        vector<int> carnets;
 
-    for (int i=0; i<listaC.size(); i++) {
-        vector<int> carnetEstudiantes;
-        for (int j=0; j<listaE.size(); j++) {
-            if (listaC.at(i).carrera == listaE.at(j).carrera) {
-                c.carnet = listaE.at(j).carnet;
-                c.carrera = listaE.at(j).carrera;
-                c.semestre = listaE.at(j).semestre;
-                listaCarreras.push_back(c);
+        // Filtrar estudiantes de la carrera (comparación insensible a mayúsculas)
+        for (int j = 0; j < listaE.size(); j++) {
+            string carreraArchivo = listaCarreras[i];
+            string carreraEstudiante = listaE[j].carrera;
+
+            transform(carreraArchivo.begin(), carreraArchivo.end(), carreraArchivo.begin(), ::tolower);
+            transform(carreraEstudiante.begin(), carreraEstudiante.end(), carreraEstudiante.begin(), ::tolower);
+
+            if (carreraArchivo == carreraEstudiante) {
+                carnets.push_back(listaE[j].carnet);
+            }
+        }
+
+        /*Ahora vamos con las notas*/
+        vector<double> notas;
+        for (int k=0; k<carnets.size(); k++) {
+            for (int h=0; h<listaN.size(); h++) {
+                if (carnets.at(k) ==listaN.at(h).carnet) {
+                    notas.push_back(listaN.at(h).nota); }
             }
         }
 
 
+        /*calcular promedio*/
+        /*como dice el enunciado que el promedio de la carrera entonces debemso tomar en cuenta
+         * a los estudiantes que estan en la carrera pero llevaron un curso pero no lo cursaron es decir
+         * estan asigandos pero lo dejaron
+         */
+
+        double suma = 0.0;
+        for (int p=0; p<carnets.size(); p++) {
+            double sumaNotasEstudiantes = 0.0;
+            int contadorNotas =0;
+            for (int r=0; r<listaN.size(); r++) {
+                if (listaN.at(r).carnet == carnets.at(p)) {
+                    sumaNotasEstudiantes += listaN.at(r).nota;
+                    contadorNotas++;
+                }
+            }
+
+            if (contadorNotas > 0) {
+                /*promedio de la nota de ese estudiante es decir de un estudiante */
+                suma += sumaNotasEstudiantes / contadorNotas;
+            }else {
+                /*si el estudiante no tiene nota*/
+                suma += 0;
+            }
+        }
+
+        /*Ahora vamos a sacar el promedio General de los estudiantes */
+
+        double promedio = 0.0;
+
+        if (!carnets.empty()) {
+            promedio = suma / carnets.size();
+        }else {
+            promedio = 0.0;
+        }
 
 
 
+        /*Contar estudiantes por Semestre */
+        map<int, int> estudiantePorSemestre;
+        for (int c =0; c < carnets.size(); c++) {
+            for (int a = 0; a < listaE.size(); a++) {
+                if (carnets.at(c) == listaE.at(a).carnet) {
+                    estudiantePorSemestre[listaE.at(a).semestre]++;
+                    break;
+                }
+            }
+        }
 
+        /*Contar los cursos total de la carrera*/
 
+        int totalCursos = 0;
+        for (int total = 0; total < listaC.size() ; total++) {
 
-    }
+            string carreraCurso = listaC.at(total).carrera;
+            string carreraArchivo = listaCarreras.at(i);
 
+            transform(carreraCurso.begin(), carreraCurso.end(), carreraCurso.begin(), ::tolower);
+            transform(carreraArchivo.begin(), carreraArchivo.end(), carreraArchivo.begin(), ::tolower);
 
+            if (carreraCurso== carreraArchivo) {
+                totalCursos++; }
+        }
+
+        html << "<h2>Carrera: " << listaCarreras.at(i) << "</h2>\n";
+        html << "<p>Total estudiantes: " << carnets.size() << "</p>\n";
+        html << "<p>Promedio general: " << promedio << "</p>\n";
+        html << "<p>Cursos disponibles: " << totalCursos << "</p>\n";
+        html << "<p>Estudiantes por semestre:</p>\n<ul>\n";
+
+        for (auto &e : estudiantePorSemestre) {
+            html << "<li>Semestre " << e.first << ": " << e.second << " estudiantes</li>\n";
+        }
+        html << "</ul>\n<hr>\n";
+        }
+    html << "</body>\n";
+    html << "</html>\n";
+    html.close();
+    cout << "Reporte generado correctamente.\n";
 }

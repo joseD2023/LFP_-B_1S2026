@@ -9,6 +9,7 @@
 #include "include/rendimientoEstudiantes.h"
 #include "include/mejoresEstudiantes.h"
 #include "include/CursosMasReprobacion.h"
+#include "include/analisisCarrera.h"
 
 using namespace std;
 
@@ -68,7 +69,11 @@ int main() {
             generarReporteMejoresEstudiantes(listaEstudiantes, listaNotas);
         }else if (opc == 7) {
             generarReportesMasReprobados(listaNotas, listaCursos);
-
+        }else if (opc == 8) {
+            generarReportesAnalisisCarrera(listaEstudiantes, listaNotas, listaCursos);
+        }else if (opc == 9) {
+            cout << "Gracias por Utilizar El Programa Lenguajes Formales De La Rosa" << endl;
+            break;
         }
     }
 

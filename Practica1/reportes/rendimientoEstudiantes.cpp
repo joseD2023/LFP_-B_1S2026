@@ -21,10 +21,9 @@ void generarReportesRendimiento(vector<Estudiante>listaE, vector<Notas> listaN, 
      */
 
     ofstream html("rendimiento.html");
+    if (!html.is_open()){cout << "Error al crear archivo html. "; return; }
     html << "<!DOCTYPE html>\n";
     html << "<html>\n<head>\n<title>Rendimiento</title>\n</head>\n";
-
-    if (!html.is_open()){cout << "Error al crear archivo html. "; return; }
 
     for (int i=0; i < listaE.size(); i++) {
         vector<double> notasEstudiantes;
