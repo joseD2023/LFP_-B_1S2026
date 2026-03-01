@@ -15,7 +15,7 @@ using namespace std;
  * que el lenguaje lo reconozca asi que es más facil aún para ordenarlos
  */
 struct Estudiante {
-    string carnet;
+    int carnet;
     string nombre;
     string apellido;
     string carrera;

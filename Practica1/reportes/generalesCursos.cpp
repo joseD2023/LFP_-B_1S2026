@@ -18,7 +18,7 @@ using namespace std;
 void generarReporteCursos(vector<Cursos> listaC, vector <Notas> listaN) {
     ofstream html("index.html");
     html << "<!DOCTYPE html>\n";
-    html << "<html>\n<head>\n<title>Reportes</title>\n</head>\n";
+    html << "<html>\n<head>\n<title>Reportes Cursos }</title>\n</head>\n";
 
     if (!html.is_open()){cout << "Error al Crear el Archivo Html."; return; }
 

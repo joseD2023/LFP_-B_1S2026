@@ -6,6 +6,10 @@
 #include "include/nota.h"
 #include "include/estudiante.h"
 #include "include/generalesCursos.h"
+#include "include/rendimientoEstudiantes.h"
+#include "include/mejoresEstudiantes.h"
+#include "include/CursosMasReprobacion.h"
+
 using namespace std;
 
 
@@ -27,7 +31,7 @@ int main() {
         cout << "4. Generar Reporte: Estadísticas por Curso       " << endl;
         cout << "5. Generar Reporte: Rendimiento por Estudiante   " << endl;
         cout << "6. Generar Reporte: Top 10 Mejores Estudiantes   " << endl;
-        cout << "7. Generar Reporte: Cursos con Mayor Reprobación " << endl;
+        cout << "7. Generar Reporte: Cursos con Mayor Reprobacion " << endl;
         cout << "8. Generar Reporte: Analisis por Carrera         " << endl;
         cout << "9. Salir                                         " << endl;
         cout << "Seleccione una opcion:                           " << endl;
@@ -58,6 +62,13 @@ int main() {
             imprimirPantalla(listaNotas);
         }else if (opc == 4) {
             generarReporteCursos(listaCursos, listaNotas);
+        }else if (opc == 5) {
+            generarReportesRendimiento(listaEstudiantes, listaNotas, listaCursos);
+        }else if (opc == 6) {
+            generarReporteMejoresEstudiantes(listaEstudiantes, listaNotas);
+        }else if (opc == 7) {
+            generarReportesMasReprobados(listaNotas, listaCursos);
+
         }
     }
 

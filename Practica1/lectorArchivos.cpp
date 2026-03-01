@@ -126,7 +126,7 @@ vector<Estudiante> cargarEstudiante(string nombreArchivo1, vector <Estudiante> l
         if (!sinFallas) {
             //Condicion Semantico
             if (validacionCarnet(carnet)  && nombreValido(nombre)  && apellidoValido(apellido) && carreraValidaUsac(carrera) && esSemestreValido(semestre)) {
-                datoEstudiantil.carnet = carnet; //pasarlo a numero luego
+                datoEstudiantil.carnet = stoi(carnet); //pasarlo a numero luego
                 datoEstudiantil.nombre = nombre;
                 datoEstudiantil.apellido = apellido;
                 datoEstudiantil.semestre = stoi(semestre);
