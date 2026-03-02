@@ -39,12 +39,12 @@ Genera un reporte en formato HTML con estadisticas por carrera.
 
 ## Estructura del proyecto
 
-LFP_-B_1S2026/
-├── Practica1/
-│   ├── data/
-│   ├── Entregables/
-│   ├── Reportes/
-│   └── include/
+LFP_-B_1S2026/<br>
+├── Practica1/ <br>
+│   ├── data/<br>
+│   ├── Entregables/<br>
+│   ├── Reportes/<br>
+│   └── include/<br>
 └── README.md
 
 ## Requisitos
