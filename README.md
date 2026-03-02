@@ -41,10 +41,10 @@ Genera un reporte en formato HTML con estadisticas por carrera.
 
 LFP_-B_1S2026/
 ├── Practica1/
-│   ├── data
-│   ├── Entregables
-│   ├── Reportes
-│   └── include
+│   ├── data/
+│   ├── Entregables/
+│   ├── Reportes/
+│   └── include/
 └── README.md
 
 ## Requisitos
@@ -63,9 +63,6 @@ LFP_-B_1S2026/
 - Si un estudiante no tiene cursos, su promedio se toma como 0.
 - El promedio general se calcula con todos los estudiantes de la carrera.
 
-## Autor
-Nombre del estudiante  
-Seccion <SECCION>  
-Primer Semestre 2026
+
 
 
