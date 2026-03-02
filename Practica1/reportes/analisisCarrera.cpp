@@ -147,17 +147,33 @@ void generarReportesAnalisisCarrera(vector<Estudiante>listaE, vector<Notas> list
                 totalCursos++; }
         }
 
-        html << "<h2>Carrera: " << listaCarreras.at(i) << "</h2>\n";
-        html << "<p>Total estudiantes: " << carnets.size() << "</p>\n";
-        html << "<p>Promedio general: " << promedio << "</p>\n";
-        html << "<p>Cursos disponibles: " << totalCursos << "</p>\n";
-        html << "<p>Estudiantes por semestre:</p>\n<ul>\n";
+
+        html << "<table border='1' cellpadding='5' cellspacing='0'>\n";
+
+        html << "<tr><th colspan='2'>Reporte Analisis Carrera</th></tr>\n";
+
+        html << "<tr><td><strong>Carrera</strong></td><td>"
+             << listaCarreras.at(i) << "</td></tr>\n";
+
+        html << "<tr><td><strong>Total estudiantes</strong></td><td>"
+             << carnets.size() << "</td></tr>\n";
+
+        html << "<tr><td><strong>Promedio general</strong></td><td>"
+             << promedio << "</td></tr>\n";
+
+        html << "<tr><td><strong>Cursos disponibles</strong></td><td>"
+             << totalCursos << "</td></tr>\n";
+
+        html << "<tr><th colspan='2'>Estudiantes por semestre</th></tr>\n";
 
         for (auto &e : estudiantePorSemestre) {
-            html << "<li>Semestre " << e.first << ": " << e.second << " estudiantes</li>\n";
+            html << "<tr><td>Semestre " << e.first << "</td><td>"
+                 << e.second << " estudiantes</td></tr>\n";
         }
-        html << "</ul>\n<hr>\n";
+
+        html << "</table>\n<hr>\n";
         }
+
     html << "</body>\n";
     html << "</html>\n";
     html.close();

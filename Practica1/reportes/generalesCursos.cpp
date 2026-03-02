@@ -16,14 +16,23 @@ using namespace std;
 
 
 void generarReporteCursos(vector<Cursos> listaC, vector <Notas> listaN) {
-    ofstream html("index.html");
-    html << "<!DOCTYPE html>\n";
-    html << "<html>\n<head>\n<title>Reportes Cursos }</title>\n</head>\n";
+    ofstream html("EstadisticasGeneralesCurso.html");
+
 
     if (!html.is_open()){cout << "Error al Crear el Archivo Html."; return; }
 
     if (listaC.empty() || listaN.empty()) {cout << "No se Encuentran Cursos en la Lista";return;
     }
+
+    html << "<!DOCTYPE html>\n";
+    html << "<html lang='es'>\n";
+    html << "<head>\n";
+    html << "  <meta charset='UTF-8'>\n";
+    html << "  <title>Cursos</title>\n";
+    html << "</head>\n";
+    html << "<body>\n";
+    html << "<h1> Estadisticas Generales por Curso </h1>\n";
+    html << "<hr>\n";
 
     /*Nombre del curso y la cantidad de estudiantes necesitamos dos listas*/
 
@@ -92,19 +101,21 @@ void generarReporteCursos(vector<Cursos> listaC, vector <Notas> listaN) {
         /*vamos a crear nuestro archivo html para mostrar los datos
          * vamos a escribir contendio en el html
          */
+        html << "<table border='1' cellpadding='5' cellspacing='0'>\n";
+        html << "<tr><td>Nombre del Curso</td><td>" << listaC.at(i).nombre <<"</td></tr>\n";
+        html << "<tr><td>Cantidad de Estudiantes</td><td>" << temporal.size() << "</td></tr>\n";
+        html << "<tr><td>Promedio</td><td>" << promedio << "</td></tr>\n";
+        html << "<tr><td>Nota Maxima</td><td>" << notaMax << "</td></tr>\n";
+        html << "<tr><td>Nota Minima</td><td>" << notaMin << "</td></tr>\n";
+        html << "<tr><td>Mediana</td><td>" << mediana << "</td></tr>\n";
+        html << "<tr><td>Desviacion Estandar</td><td>" << desviacionEstandar << "</td></tr>\n";
+        html << "</table>\n";
         html << "<hr>\n";
-        html << "<body>\n";
-        html << "<p>Nombre del Curso: " << listaC.at(i).nombre <<"</p>\n";
-        html << "<p>Cantidad Estudiantes: " << temporal.size() <<"</p>\n";
-        html << "<p>Promedio: " << promedio <<"</p>\n";
-        html << "<p>Nota Maxima: " << notaMax <<"</p>\n";
-        html << "<p>Nota Minima: " << notaMin <<"</p>\n";
-        html << "<p>Mediana: " << mediana <<"</p>\n";
-        html << "<p>Desviacion Estandar:  " << desviacionEstandar <<"</p>\n";
 
     }
     html << "</body>\n";
     html << "</html>\n";
     /*cerramos el archivo del html*/
     html.close();
+    cout << "Reporte generado correctamente Estadisticas Generales por Curso ." << endl;
 }

@@ -7,11 +7,32 @@
 #include "algorithm"
 #include "cctype"
 #include <iostream>
+#include "vector"
+#include "fstream"
 using namespace std;
 
 
-/*Validaciones Semantica del archivo estudiante.lfp*/
+/*Vamos a trabajar en las validaciones de los Cursos vamos hacer una funcion que leea un archivo con los cursos
+ * y los compare con los que vienen para validar
+ */
 
+vector<string> lectorCursosArchivo(string nombreArchivo) {
+    vector<string> cursos;
+    string linea;
+    ifstream archivo(nombreArchivo);
+    if (!archivo.is_open()){return cursos;} /*una lista vacia*/
+
+    while (getline(archivo, linea)) {
+        if (!linea.empty()) {
+            cursos.push_back(linea);
+        }
+    }
+    archivo.close();
+    return cursos;
+}
+
+
+/*Validaciones Semantica del archivo estudiante.lfp*/
 bool validacionCarnet(string carnet) {
     if (carnet.length() != 9) {
         cout << "   | Error: Carnet Invalido | = " << carnet <<  endl;
@@ -36,18 +57,23 @@ bool apellidoValido(string apellido) {
 
 
 bool carreraValidaUsac(string carrera) {
-
     //vamos a transformar la palabra para que admita sin importar si es mayusculas o minuscula
-    transform(carrera.begin(), carrera.end(), carrera.begin(), ::tolower);
-    string carrerasValidas[] = {"industrial", "civil", "ambiental", "quimica", "sistemas", "mecanica", "electronica", "electrica", "mecanicaindustrial", "mecanicaelectrica"};
+
+    vector<string> carrerasValida = lectorCursosArchivo("../data/carreras.lfp");
     bool encontradoCarrera = false;
 
     if (carrera.empty()) {return false; } //si viene una respuesta falsa de un nombre valido va a regresa que la carrera no es valida
 
-    for (string c : carrerasValidas) {
-        if (c == carrera) {encontradoCarrera = true;}}
-    if (encontradoCarrera) {return true; }
+    for (int i=0; i < carrerasValida.size(); i++) {
+        string carreraBusqueda = carrera;
+        string carreraArchivo = carrerasValida.at(i);
+        transform(carreraBusqueda.begin(), carreraBusqueda.end(), carreraBusqueda.begin(), ::tolower);
+        transform(carreraArchivo.begin(), carreraArchivo.end(), carreraArchivo.begin(), ::tolower);
 
+        if (carreraArchivo == carreraBusqueda){encontradoCarrera = true; }
+    }
+
+    if (encontradoCarrera) {return true; }
     cout << endl;
     cout << "   | Error: Carrera Invalida | =  " << carrera <<  endl;
     return false;
@@ -67,7 +93,6 @@ bool esSemestreValido(string semestre) {
 
 
 /*Validaciones Semantica del archivo curso.lfp*/
-
 bool validacionNombreCurso(string nombreCurso) {
     /*ahora en la validacion del nombre del curso debemos validar que el numero del curso osea ya sea
      * base de datos 1 o base de datos 2 pero no debe existir una base de datos 1000
@@ -112,7 +137,6 @@ bool validacionCreditos(string creditos) {
 
 
 /*Validaciones Semantica del archivo notas.lfp*/
-
 bool validacionNota(string nota) {
     double valorNota = stod(nota);
     if (valorNota < 0.0 || valorNota >100.0){return false;}return true;

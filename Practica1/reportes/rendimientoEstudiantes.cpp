@@ -23,7 +23,14 @@ void generarReportesRendimiento(vector<Estudiante>listaE, vector<Notas> listaN, 
     ofstream html("rendimiento.html");
     if (!html.is_open()){cout << "Error al crear archivo html. "; return; }
     html << "<!DOCTYPE html>\n";
-    html << "<html>\n<head>\n<title>Rendimiento</title>\n</head>\n";
+    html << "<html lang='es'>\n";
+    html << "<head>\n";
+    html << "  <meta charset='UTF-8'>\n";
+    html << "  <title>Cursos</title>\n";
+    html << "</head>\n";
+    html << "<body>\n";
+    html << "<h1> Rendimiento Por Estudiante </h1>\n";
+    html << "<hr>\n";
 
     for (int i=0; i < listaE.size(); i++) {
         vector<double> notasEstudiantes;
@@ -66,16 +73,18 @@ void generarReportesRendimiento(vector<Estudiante>listaE, vector<Notas> listaN, 
 
         promedio = suma / notasEstudiantes.size();
 
-        html << "<hr>\n";
-        html << "<body>\n";
-        html << "<p>Nombre del Estudiante: " << listaE.at(i).nombre <<"</p>\n";
-        html << "<p>Carnet: " << listaE.at(i).carnet <<"</p>\n";
-        html << "<p>Carrera: " << listaE.at(i).carrera <<"</p>\n";
-        html << "<p>Semestre: " << listaE.at(i).semestre <<"</p>\n";
-        html << "<p>Promedio General: " << promedio <<"</p>\n";
-        html << "<p>Cursos Aprobados: " << cursosAprobados <<"</p>\n";
-        html << "<p>Cursos Reprobados:  " << cursosReprobados <<"</p>\n";
-        html << "<p>Creditos Acumulados:  " << creditosAcumulados <<"</p>\n";
+        html << "<table border='1' cellpadding='5' cellspacing='0' "
+                "style='border-collapse:collapse; margin-bottom:25px;'>\n";
+        html << "<tr><th colspan='2'>Reporte del Estudiante</th></tr>\n";
+        html << "<tr><td>Nombre del Estudiante</td><td>" << listaE.at(i).nombre << "</td></tr>\n";
+        html << "<tr><td>Carnet</td><td>" << listaE.at(i).carnet << "</td></tr>\n";
+        html << "<tr><td>Carrera</td><td>" << listaE.at(i).carrera << "</td></tr>\n";
+        html << "<tr><td>Semestre</td><td>" << listaE.at(i).semestre << "</td></tr>\n";
+        html << "<tr><td>Promedio General</td><td>" << promedio << "</td></tr>\n";
+        html << "<tr><td>Cursos Aprobados</td><td>" << cursosAprobados << "</td></tr>\n";
+        html << "<tr><td>Cursos Reprobados</td><td>" << cursosReprobados << "</td></tr>\n";
+        html << "<tr><td>Créditos Acumulados</td><td>" << creditosAcumulados << "</td></tr>\n";
+        html << "</table>\n<hr>\n";
     }
 
     html << "</body>\n";

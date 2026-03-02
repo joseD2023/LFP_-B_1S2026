@@ -65,7 +65,7 @@ bool identificadorCurso(string curso) {
             if (!aux.empty() && isdigit(aux.back())) { //si esta vacio aux ni lo intenta leer porque
                 return false;
             }
-            aux += p;
+            aux += p; //sis
             continue;
         }else if (isdigit(p)) {
                 aux += p;

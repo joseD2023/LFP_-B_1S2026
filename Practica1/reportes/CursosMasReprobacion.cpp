@@ -43,8 +43,6 @@ void generarReportesMasReprobados(vector<Notas> listaN, vector<Cursos> listaC) {
     html << "<h1> Cursos Mas Reprobados </h1>\n";
     html << "<hr>\n";
 
-
-
     for (int i=0; i<listaC.size(); i++) {
         int aprobados = 0;
         int reprobados =0 ;
@@ -92,14 +90,16 @@ void generarReportesMasReprobados(vector<Notas> listaN, vector<Cursos> listaC) {
 
     for (int s=0; s < listaCursosReprobados.size(); s++) {
         if (listaCursosReprobados.at(s).repro > 0 ) {
-            html << "<p><strong>codigo del Curso:</strong> " << listaCursosReprobados.at(s).c.codigo << "</p>\n";
-            html << "<p><strong>Nombre del Curso:</strong> " << listaCursosReprobados.at(s).c.nombre << "</p>\n";
-            html << "<p><strong>Total de Estudiante:</strong> " << listaCursosReprobados.at(s).cantidad << "</p>\n";
-            html << "<p><strong>Cantidad de Aprobados:</strong> " << listaCursosReprobados.at(s).aproba << "</p>\n";
-            html << "<p><strong>Cantidad de Reprobados:</strong> " << listaCursosReprobados.at(s).repro << "</p>\n";
-            html << "<p><strong>Porcentaje de Reprobacion:</strong> " << listaCursosReprobados.at(s).media << "</p>\n";
-            html << "<hr>\n";
-
+            html << "<table border='1' cellpadding='5' cellspacing='0' "
+                    "style='border-collapse:collapse; margin-bottom:25px;'>\n";
+            html << "<tr><th colspan='2'>Curso</th></tr>\n";
+            html << "<tr><td>Código del Curso</td><td>" << listaCursosReprobados.at(s).c.codigo << "</td></tr>\n";
+            html << "<tr><td>Nombre del Curso</td><td>" << listaCursosReprobados.at(s).c.nombre << "</td></tr>\n";
+            html << "<tr><td>Total de Estudiantes</td><td>" << listaCursosReprobados.at(s).cantidad << "</td></tr>\n";
+            html << "<tr><td>Cantidad de Aprobados</td><td>" << listaCursosReprobados.at(s).aproba << "</td></tr>\n";
+            html << "<tr><td>Cantidad de Reprobados</td><td>" << listaCursosReprobados.at(s).repro << "</td></tr>\n";
+            html << "<tr><td>Porcentaje de Reprobación</td><td>" << listaCursosReprobados.at(s).media << "%</td></tr>\n";
+            html << "</table>\n<hr>\n";
         }
     }
     html << "</body>\n";

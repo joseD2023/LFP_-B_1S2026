@@ -28,8 +28,8 @@ int main() {
         cout << "=====================================" <<   endl;
         cout << "1. Cargar Archivos Estudiantes                   " << endl;
         cout << "2. Cargar Archivos Cursos                        " << endl;
-        cout << "3. Cargar Archivos Notas                         " << endl;
-        cout << "4. Generar Reporte: Estadísticas por Curso       " << endl;
+        cout << "3. Cargar Archivos Notas                        " << endl;
+        cout << "4. Generar Reporte: Estadisticas por Curso       " << endl;
         cout << "5. Generar Reporte: Rendimiento por Estudiante   " << endl;
         cout << "6. Generar Reporte: Top 10 Mejores Estudiantes   " << endl;
         cout << "7. Generar Reporte: Cursos con Mayor Reprobacion " << endl;

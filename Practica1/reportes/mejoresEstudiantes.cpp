@@ -39,7 +39,7 @@ void generarReporteMejoresEstudiantes(vector<Estudiante> listaE, vector<Notas> l
  html << "<html lang='es'>\n";
  html << "<head>\n";
  html << "  <meta charset='UTF-8'>\n";
- html << "  <title>Mejores Estudiantes Usac</title>\n";
+ html << "  <title>cursos</title>\n";
  html << "</head>\n";
  html << "<body>\n";
  html << "<h1>🏆 Top 10 Mejores Estudiantes</h1>\n";
@@ -90,12 +90,16 @@ void generarReporteMejoresEstudiantes(vector<Estudiante> listaE, vector<Notas> l
  for (int t = 0; t < limite ; t++) {
   if (t < 3) {colcocarMedalla = medallas[t];}
 
-  html << "<p><strong>Posición:</strong> " << t + 1 << colcocarMedalla << "</p>\n";
-  html << "<p><strong>Nombre:</strong> " << listasPromedios.at(t).studens.nombre << "</p>\n";
-  html << "<p><strong>Carnet:</strong> " << listasPromedios.at(t).studens.carnet << "</p>\n";
-  html << "<p><strong>Carrera:</strong> " << listasPromedios.at(t).studens.carrera << "</p>\n";
-  html << "<p><strong>Semestre:</strong> " << listasPromedios.at(t).studens.semestre << "</p>\n";
-  html << "<p><strong>Promedio:</strong> " << listasPromedios.at(t).promedio << "</p>\n";
+  html << "<table border='1' cellpadding='5' cellspacing='0' "
+        "style='border-collapse:collapse; margin-bottom:25px;'>\n";
+  html << "<tr><th colspan='2'>Reporte Mejores Estudiantes</th></tr>\n";
+  html << "<tr><td>Posicion Estudiante: </td><td>" << t + 1 << colcocarMedalla  << "</td></tr>\n";
+  html << "<tr><td>Nombre Estudiante: </td><td>" << listasPromedios.at(t).studens.nombre  << "</td></tr>\n";
+  html << "<tr><td>Carnet Estudiante: </td><td>"  << listasPromedios.at(t).studens.carnet  << "</td></tr>\n";
+  html << "<tr><td>Carrera Estudiante: </td><td>" << listasPromedios.at(t).studens.carrera  << "</td></tr>\n";
+  html << "<tr><td>Semestre Estudiante: </td><td>" << listasPromedios.at(t).studens.semestre  << "</td></tr>\n";
+  html << "<tr><td>Promedio Estudiante: </td><td>" << listasPromedios.at(t).promedio  << "</td></tr>\n";
+  html << "</table>\n<hr>\n";
 
   colcocarMedalla = " ";
   html << "<hr>\n";

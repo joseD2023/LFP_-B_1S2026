@@ -53,7 +53,7 @@ void imprimirPantalla(vector<Cursos> lista) {
 void imprimirPantalla(vector<Notas> lista) {
     cout << endl;
     cout << "======================================================" << endl;
-    cout << "MOSTRAR CURSOS                                   " << endl;
+    cout << "MOSTRAR NOTAS                                         " << endl;
     cout << "======================================================" << endl;
     for (int i=0; i < lista.size(); i++) {
         cout << "Carnet Curso:" << lista[i].carnet << endl ;
